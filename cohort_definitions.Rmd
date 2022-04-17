@@ -1,0 +1,42 @@
+---
+title: "Cohort definitions for the blood anti-coagulant study in Nishimura and Suchard (2022)"
+fontsize: 12pt
+geometry: margin=1in
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+    toc_depth: 2
+    toc_float: yes
+    number_sections: no
+    css: style.css
+---
+
+```{r setup, include=FALSE}
+library(here)
+library(dplyr)
+
+source(here("PrettyOutput.R"))
+```
+
+The OHDSI Common Data Model definitions of the treatment (dabigatran) group, control (warfarin) group, and incidents of major gastrointestinal bleeding for the blood anti-coagulant study application in [Nishimura and Suchard (2022), "Prior-preconditioned conjugate gradient method for accelerated Gibbs sampling in ‘large n & large p’ Bayesian sparse regression."](https://doi.org/10.1080/01621459.2022.2057859)
+
+```{r warfarin-user, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+baseCohortJson <- SqlRender::readSql(here("json", "warfarin_user.json"))
+printCohortDefinitionFromNameAndJson(name = "First-time users of warfarin",
+                                     json = baseCohortJson)
+```
+
+```{r dabigatran-user, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+baseCohortJson <- SqlRender::readSql(here("json", "dabigatran_user.json"))
+printCohortDefinitionFromNameAndJson(name = "First-time users of dabigatran",
+                                     json = baseCohortJson)
+```
+
+```{r gi-bleed, echo=FALSE, results="asis", warning=FALSE, message=FALSE}
+baseCohortJson <- SqlRender::readSql(here("json", "gi_bleed.json"))
+printCohortDefinitionFromNameAndJson(name = "Gastrointestinal bleeding",
+                                     json = baseCohortJson)
+```
+
+
